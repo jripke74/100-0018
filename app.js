@@ -1,16 +1,13 @@
-const http = require('http');
+const express = require('express');
 
-function handleRequest(req, res) {
-  if (req.url === '/currenttime') {
-    res.statusCode = 200;
-    res.end('<h1>' + new Date().toISOString() + '</h1>')
-  } else if (req.url === '/') {
-    res.statusCode = 200;
-    res.end('<h1>Hello Liberty Lake!</h1>');
-  }
-}
+const app = express();
 
+app.get('/currenttime', function(req, res) {
+  res.send('<h1>' + new Date().toISOString() + '</h1>');
+});
 
-const server = http.createServer(handleRequest);
+app.get('/', function(req, res) {
+  res.send('<h1>Hello Spokane!</h1>');
+});
 
-server.listen(3000);
+app.listen(3000);
